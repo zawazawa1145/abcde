@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>薬投与削除</title>
+  <style>
+    /* スタイルは省略しています */
+  </style>
+</head>
+<body>
+
+<h1>薬投与削除</h1>
+
+<!-- 確認画面 -->
+<div id="confirmation-screen">
+  <h2>確認画面</h2>
+  <p>投与を中止したい薬剤を選択してください。</p>
+  <!-- 仮の薬剤一覧 -->
+  <ul id="medication-list">
+    <li>薬剤A <button class="delete-medication">削除</button></li>
+    <li>薬剤B <button class="delete-medication">削除</button></li>
+    <li>薬剤C <button class="delete-medication">削除</button></li>
+  </ul>
+  <button id="back-to-selection">薬剤選択画面へ戻る</button>
+  <button id="confirm-treatment">処置確定</button>
+</div>
+
+<script>
+  // 削除ボタンにイベントリスナーを追加
+  const deleteButtons = document.getElementsByClassName("delete-medication");
+  for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener("click", function() {
+      // 削除前に確認メッセージを表示
+      const medicationName = this.parentNode.textContent.trim();
+      if (confirm(medicationName + " を削除しますか？")) {
+        deleteMedication(this.parentNode);
+      }
+    });
+  }
+
+  // 薬剤削除関数
+  function deleteMedication(liElement) {
+    // ここで薬剤の削除処理を行う
+    alert(liElement.textContent.trim() + " を削除しました。");
+    liElement.remove(); // リストから削除
+  }
+
+  // 薬剤選択画面へ戻るボタンのイベントリスナー
+  document.getElementById("back-to-selection").addEventListener("click", function() {
+    // ここで薬剤選択画面へ戻る処理を行う
+    alert("薬剤選択画面へ戻ります。");
+  });
+
+  // 処置確定ボタンのイベントリスナー
+  document.getElementById("confirm-treatment").addEventListener("click", function() {
+    // ここで処置確定処理を行う
+    alert("処置を確定しました。");
+  });
+</script>
+
+</body>
+</html>
+
+

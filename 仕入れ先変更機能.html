@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仕入れ先情報変更</title>
+</head>
+<body>
+
+<h2>仕入れ先情報変更</h2>
+
+<form action="/update_supplier_info" method="post">
+  <div>
+    <label for="supplier_phone">新しい電話番号:</label>
+    <input type="tel" id="supplier_phone" name="supplier_phone" required>
+  </div>
+  <button type="submit">変更確認</button>
+</form>
+
+<div id="error-message" style="color: red; display: none;">エラーが発生しました。</div>
+
+</body>
+</html>

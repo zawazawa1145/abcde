@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>他住所→仕入れ先検索</title>
+</head>
+<body>
+
+<h2>他住所→仕入れ先検索</h2>
+
+<form action="/search_supplier_by_address" method="post">
+  <div>
+    <label for="address">住所の一部:</label>
+    <input type="text" id="address" name="address" required>
+  </div>
+  <button type="submit">検索</button>
+</form>
+
+<div id="search-results">
+  <!-- ここに検索結果が表示されます -->
+</div>
+
+</body>
+</html>

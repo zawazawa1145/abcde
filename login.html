@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログイン画面</title>
+</head>
+<body>
+
+<h2>ログイン</h2>
+
+<form action="/login" method="post">
+  <div>
+    <label for="userid">ユーザーID:</label>
+    <input type="text" id="userid" name="userid" required>
+  </div>
+  <div>
+    <label for="password">パスワード:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <button type="submit">ログイン</button>
+</form>
+
+<div id="error-message" style="color: red; display: none;">ユーザーIDまたはパスワードが間違っています。</div>
+
+<script>
+  // フォームの送信時にJavaScriptで入力を検証
+  document.querySelector('form').addEventListener('submit', function(event) {
+    // ユーザーIDとパスワードの値を取得
+    var userid = document.getElementById('userid').value;
+    var password = document.getElementById('password').value;
+
+    // ここでバックエンドにユーザーIDとパスワードを送信して認証する処理を追加
+    // 仮のエラーチェックとして、ユーザーIDとパスワードが適切でない場合にエラーメッセージを表示する
+    if (userid !== "admin" || password !== "password") {
+      event.preventDefault(); // フォーム送信を中止
+      document.getElementById('error-message').style.display = 'block'; // エラーメッセージを表示
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>従業員更新</title>
+</head>
+<body>
+
+<h2>従業員更新</h2>
+
+<form action="/update_employee" method="post">
+  <div>
+    <label for="userid">ユーザーID:</label>
+    <input type="text" id="userid" name="userid" required>
+  </div>
+  <button type="submit">検索</button>
+</form>
+
+<div id="error-message" style="color: red; display: none;">エラーが発生しました。</div>
+
+<script>
+  // フォームの送信時にJavaScriptで入力を検証
+  document.querySelector('form').addEventListener('submit', function(event) {
+    // ユーザーIDの値を取得
+    var userid = document.getElementById('userid').value;
+
+    // ここでバックエンドにユーザーIDを送信して検索する処理を追加
+    // 仮のエラーチェックとして、ユーザーIDが空欄である場合にエラーメッセージを表示する
+    if (!userid) {
+      event.preventDefault(); // フォーム送信を中止
+      document.getElementById('error-message').innerText = 'ユーザーIDを入力してください。';
+      document.getElementById('error-message').style.display = 'block'; // エラーメッセージを表示
+    }
+  });
+</script>
+
+</body>
+</html>

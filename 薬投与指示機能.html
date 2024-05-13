@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>薬投与指示機能</title>
+  <style>
+    /* スタイルは省略しています */
+  </style>
+</head>
+<body>
+
+<!-- 処置画面 -->
+<div id="treatment-screen">
+  <h2>薬投与指示</h2>
+  <form id="treatment-form">
+    <label for="medicine">薬剤名:</label>
+    <select id="medicine" name="medicine">
+      <option value="medicine1">薬剤1</option>
+      <option value="medicine2">薬剤2</option>
+      <!-- 他の薬剤オプションをここに追加 -->
+    </select><br>
+    <label for="quantity">数量:</label>
+    <input type="number" id="quantity" name="quantity" min="1" value="1"><br>
+    <button type="submit">確認</button>
+  </form>
+</div>
+
+<!-- 確認画面 -->
+<div id="confirmation-screen" style="display: none;">
+  <h2>薬投与指示の確認</h2>
+  <ul id="confirmed-medicines"></ul>
+  <button id="back-to-selection">薬剤選択画面へ戻る</button>
+  <button id="delete-selection">削除</button>
+  <button id="confirm-treatment">処置確定</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const treatmentForm = document.getElementById("treatment-form");
+    const confirmationScreen = document.getElementById("confirmation-screen");
+    const confirmedMedicinesList = document.getElementById("confirmed-medicines");
+
+    treatmentForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const medicineName = treatmentForm.elements["medicine"].value;
+      const quantity = treatmentForm.elements["quantity"].value;
+      // ここで確認画面に選択した薬剤を追加する処理を実行
+      addToConfirmedMedicines(medicineName, quantity);
+      // 画面を切り替える
+      treatmentForm.reset();
+      document.getElementById("treatment-screen").style.display = "none";
+      confirmationScreen.style.display = "block";
+    });
+
+    function addToConfirmedMedicines(medicineName, quantity) {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${medicineName} x${quantity}`;
+      confirmedMedicinesList.appendChild(listItem);
+    }
+
+    // 「薬剤選択画面へ戻る」ボタンの処理
+    document.getElementById("back-to-selection").addEventListener("click", function() {
+      document.getElementById("treatment-screen").style.display = "block";
+      confirmationScreen.style.display = "none";
+    });
+
+    // 「削除」ボタンの処理
+    document.getElementById("delete-selection").addEventListener("click", function() {
+      confirmedMedicinesList.innerHTML = ""; // 選択した薬剤をリセット
+    });
+
+    // 「処置確定」ボタンの処理
+    document.getElementById("confirm-treatment").addEventListener("click", function() {
+      // ここで処置を確定する処理を実行
+      alert("処置が確定されました。");
+      confirmedMedicinesList.innerHTML = ""; // 選択した薬剤をリセット
+      document.getElementById("treatment-screen").style.display = "block";
+      confirmationScreen.style.display = "none";
+    });
+  });
+</script>
+
+</body>
+</html>

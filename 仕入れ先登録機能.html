@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仕入れ先登録</title>
+</head>
+<body>
+
+<h2>仕入れ先登録</h2>
+
+<form action="/register_supplier" method="post">
+  <div>
+    <label for="supplier_id">仕入れ先ID:</label>
+    <input type="text" id="supplier_id" name="supplier_id" required>
+  </div>
+  <div>
+    <label for="supplier_name">仕入れ先名:</label>
+    <input type="text" id="supplier_name" name="supplier_name" required>
+  </div>
+  <div>
+    <label for="supplier_address">仕入れ先住所:</label>
+    <input type="text" id="supplier_address" name="supplier_address" required>
+  </div>
+  <div>
+    <label for="supplier_phone">仕入れ先電話番号:</label>
+    <input type="tel" id="supplier_phone" name="supplier_phone" required>
+  </div>
+  <div>
+    <label for="capital">資本金:</label>
+    <input type="text" id="capital" name="capital" required>
+  </div>
+  <div>
+    <label for="delivery_date">納期:</label>
+    <input type="date" id="delivery_date" name="delivery_date" required>
+  </div>
+  <button type="submit">登録確認</button>
+</form>
+
+<div id="error-message" style="color: red; display: none;">エラーが発生しました。</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>従業員登録</title>
+</head>
+<body>
+
+<h2>現従業員登録</h2>
+
+<form action="/register_employee" method="post">
+  <div>
+    <label for="userid">ユーザーID:</label>
+    <input type="text" id="userid" name="userid" required>
+  </div>
+  <div>
+    <label for="lastname">姓:</label>
+    <input type="text" id="lastname" name="lastname" required>
+  </div>
+  <div>
+    <label for="firstname">名:</label>
+    <input type="text" id="firstname" name="firstname" required>
+  </div>
+  <div>
+    <label for="password">パスワード:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div>
+    <label for="password_confirm">パスワード確認:</label>
+    <input type="password" id="password_confirm" name="password_confirm" required>
+  </div>
+  <div>
+    <label for="role">ロール:</label>
+    <select id="role" name="role" required>
+      <option value="employee">従業員</option>
+      <option value="manager">管理者</option>
+    </select>
+  </div>
+  <button type="submit">登録確認</button>
+</form>
+
+<div id="error-message" style="color: red; display: none;">エラーが発生しました。</div>
+
+<script>
+  // フォームの送信時にJavaScriptで入力を検証
+  document.querySelector('form').addEventListener('submit', function(event) {
+    // パスワードとパスワード確認の値を取得
+    var password = document.getElementById('password').value;
+    var password_confirm = document.getElementById('password_confirm').value;
+
+    // パスワードとパスワード確認が一致しているか確認
+    if (password !== password_confirm) {
+      event.preventDefault(); // フォーム送信を中止
+      document.getElementById('error-message').innerText = 'パスワードが一致しません。';
+      document.getElementById('error-message').style.display = 'block'; // エラーメッセージを表示
+    }
+  });
+</script>
+
+</body>
+</html>

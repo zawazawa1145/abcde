@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>患者検索</title>
+  <style>
+    /* スタイルは省略しています */
+  </style>
+</head>
+<body>
+
+<h1>患者検索</h1>
+
+<!-- 患者名の検索フォーム -->
+<form id="name-search-form">
+  <label for="patient-name">患者名:</label>
+  <input type="text" id="patient-name" name="patient-name" required>
+  <button type="submit">検索</button>
+</form>
+
+<div id="name-search-results">
+  <!-- 名前検索結果がここに表示されます -->
+</div>
+
+<!-- 保険証期限切れの患者の検索フォーム -->
+<form id="expiration-search-form">
+  <label for="search-date">検索日:</label>
+  <input type="date" id="search-date" name="search-date" required>
+  <button type="submit">検索</button>
+</form>
+
+<div id="expiration-search-results">
+  <!-- 期限切れ患者検索結果がここに表示されます -->
+</div>
+
+<script>
+  // 患者名の検索フォームのイベントリスナー
+  document.getElementById("name-search-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const patientName = document.getElementById("patient-name").value;
+    // ここで患者名を使って検索する処理を実行する
+    searchPatientByName(patientName);
+  });
+
+  // 保険証期限切れの患者の検索フォームのイベントリスナー
+  document.getElementById("expiration-search-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const searchDate = document.getElementById("search-date").value;
+    // ここで期限切れの患者を検索する処理を実行する
+    searchExpiredInsurances(searchDate);
+  });
+
+  // 患者名で検索する関数
+  function searchPatientByName(name) {
+    // ここで患者名を使って検索する処理を実装する
+    // 仮の検索結果を表示する例
+    const patients = [
+      { name: "患者A", insuranceNumber: "1234567890", expirationDate: "2023-01-15" },
+      { name: "患者B", insuranceNumber: "0987654321", expirationDate: "2022-12-31" }
+    ];
+    displaySearchResults(patients, "name-search-results");
+  }
+
+  // 保険証期限切れの患者を検索する関数
+  function searchExpiredInsurances(searchDate) {
+    // ここで実際のデータベースから保険証の期限が過ぎた患者を取得する処理を行う
+    // 仮の検索結果を表示する例
+    const expiredPatients = [
+      { name: "患者A", insuranceNumber: "1234567890", expirationDate: "2023-01-15" },
+      { name: "患者B", insuranceNumber: "0987654321", expirationDate: "2022-12-31" }
+    ];
+    displaySearchResults(expiredPatients, "expiration-search-results");
+  }
+
+  // 検索結果を表示する関数
+  function displaySearchResults(patients, targetElementId) {
+    const searchResultsDiv = document.getElementById(targetElementId);
+    searchResultsDiv.innerHTML = ""; // 検索結果をリセット
+
+    if (patients.length === 0) {
+      searchResultsDiv.innerHTML = "<p>該当する患者は見つかりませんでした。</p>";
+      return;
+    }
+
+    const table = document.createElement("table");
+    const tableHeader = document.createElement("thead");
+    tableHeader.innerHTML = `
+      <tr>
+        <th>患者名</th>
+        <th>保険証番号</th>
+        <th>保険証期限</th>
+      </tr>
+    `;
+    table.appendChild(tableHeader);
+
+    const tableBody = document.createElement("tbody");
+    patients.forEach(function(patient) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${patient.name}</td>
+        <td>${patient.insuranceNumber}</td>
+        <td>${patient.expirationDate}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+    table.appendChild(tableBody);
+
+    searchResultsDiv.appendChild(table);
+  }
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パスワード変更</title>
+</head>
+<body>
+
+<h2>パスワード変更</h2>
+
+<form action="/change_password" method="post">
+  <div>
+    <label for="password">新しいパスワード:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div>
+    <label for="password_confirm">新しいパスワード（確認）:</label>
+    <input type="password" id="password_confirm" name="password_confirm" required>
+  </div>
+  <button type="submit">変更</button>
+</form>
+
+<div id="error-message" style="color: red; display: none;">エラーが発生しました。</div>
+
+<script>
+  // フォームの送信時にJavaScriptで入力を検証
+  document.querySelector('form').addEventListener('submit', function(event) {
+    // パスワードとパスワード確認の値を取得
+    var password = document.getElementById('password').value;
+    var password_confirm = document.getElementById('password_confirm').value;
+
+    // パスワードとパスワード確認が一致しているか確認
+    if (password !== password_confirm) {
+      event.preventDefault(); // フォーム送信を中止
+      document.getElementById('error-message').innerText = 'パスワードが一致しません。';
+      document.getElementById('error-message').style.display = 'block'; // エラーメッセージを表示
+    }
+  });
+</script>
+
+</body>
+</html>
